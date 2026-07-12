@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+        body{
+            background:linear-gradient(135deg,#4F46E5,#0affd6,#06B6D4);
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:30px;
+        }
+
+        .container{
+            width:100%;
+            max-width:780px;
+            background:#e8ffa9;
+            padding:40px;
+            border-radius:15px;
+            box-shadow:0 10px 25px rgba(0,0,0,.2);
+        }
+
+        h1{text-align:center;color:#1e1b4b;margin-bottom:6px;font-size:26px;letter-spacing:.5px;}
+        .subtitle{text-align:center;color:#555;margin-bottom:30px;font-size:13px;}
+
+        .section-header{
+            display:flex;
+            align-items:center;
+            gap:10px;
+            background:#4F46E5;
+            color:#fff;
+            padding:10px 16px;
+            border-radius:8px;
+            margin:28px 0 18px;
+            font-size:14px;
+            font-weight:600;
+            letter-spacing:.4px;
+        }
+        .section-header .snum{
+            background:#fff;
+            color:#4F46E5;
+            border-radius:50%;
+            width:24px;
+            height:24px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:12px;
+            font-weight:700;
+            flex-shrink:0;
+        }
+
+        .section-header.office{background:#64748b;}
+        .section-header.office .snum{color:#64748b;}
+
+        .form-group{margin-bottom:16px;}
+
+        label{display:block;margin-bottom:6px;font-weight:600;color:#333;font-size:14px;}
+        .optional{font-weight:400;color:#888;font-size:12px;margin-left:4px;}
+
+        input,select,textarea{
+            width:100%;
+            padding:11px 13px;
+            border:1px solid #ccc;
+            border-radius:8px;
+            outline:none;
+            transition:.3s;
+            font-size:14px;
+            background:#fff;
+        }
+        input:focus,select:focus,textarea:focus{
+            border-color:#4F46E5;
+            box-shadow:0 0 8px rgba(79,70,229,.25);
+        }
+        textarea{resize:vertical;}
+
+        .row{display:flex;gap:15px;}
+        .row .form-group{flex:1;}
+
+        .radio-group,.check-group{display:flex;gap:18px;flex-wrap:wrap;padding:4px 0;}
+        .radio,.check{display:flex;align-items:center;gap:6px;font-weight:500;font-size:14px;cursor:pointer;}
+        .radio input,.check input{width:auto;}
+
+        .file-upload-box{
+            background:#fff;
+            border:2px dashed #4F46E5;
+            border-radius:8px;
+            padding:10px 14px;
+            transition:.3s;
+        }
+        .file-upload-box:hover{background:#f0efff;}
+        .file-upload-box input[type="file"]{border:none;padding:0;background:transparent;cursor:pointer;font-size:13px;}
+
+        .office-field input,.office-field select{
+            background:#f1f5f9;
+            color:#475569;
+        }
+
+        .declaration-box{
+            background:#fff;
+            border:1px solid #c7d2fe;
+            border-radius:8px;
+            padding:16px;
+            font-size:13px;
+            color:#444;
+            line-height:1.7;
+            margin-bottom:16px;
+        }
+
+        .sig-row{display:flex;gap:20px;margin-top:10px;}
+        .sig-box{
+            flex:1;
+            border-top:2px solid #333;
+            padding-top:6px;
+            font-size:12px;
+            color:#555;
+            text-align:center;
+        }
+
+        .terms{margin:18px 0;}
+        .terms label{display:flex;align-items:center;gap:8px;font-weight:500;font-size:14px;}
+        .terms input{width:auto;}
+        .terms a{color:#4F46E5;text-decoration:none;}
+        .terms a:hover{text-decoration:underline;}
+
+        .button-group{display:flex;gap:15px;margin-top:24px;}
+        .btn{flex:1;padding:13px;border:none;border-radius:8px;color:#fff;font-size:15px;font-weight:600;cursor:pointer;transition:.3s;}
+        .btn-submit{background:#4F46E5;}
+        .btn-reset{background:#EF4444;}
+        .btn:hover{transform:translateY(-2px);opacity:.9;}
+
+        @media(max-width:768px){
+            .row{flex-direction:column;}
+            .button-group{flex-direction:column;}
+            .container{padding:22px;}
+            .sig-row{flex-direction:column;}
+        }
+    
+
+        /* ===== DARK MODE TOGGLE ===== */
+        .theme-toggle{
+            position:fixed;
+            top:18px;
+            right:18px;
+            display:flex;
+            align-items:center;
+            gap:8px;
+            padding:10px 16px;
+            border:1px solid rgba(255,255,255,.25);
+            border-radius:999px;
+            background:#111827;
+            color:#fff;
+            font-size:14px;
+            font-weight:600;
+            cursor:pointer;
+            box-shadow:0 8px 24px rgba(0,0,0,.25);
+            transition:transform .25s, background .25s, color .25s;
+            z-index:1000;
+        }
+        .theme-toggle:hover{transform:translateY(-2px);}
+        .theme-toggle:focus-visible{
+            outline:3px solid rgba(255,255,255,.75);
+            outline-offset:3px;
+        }
+
+        body,
+        .container,
+        h1,
+        .subtitle,
+        label,
+        input,
+        select,
+        textarea,
+        .file-upload-box,
+        .declaration-box,
+        .sig-box,
+        .office-field input,
+        .office-field select{
+            transition:background-color .3s,color .3s,border-color .3s,box-shadow .3s;
+        }
+
+        body.dark-mode{
+            background:linear-gradient(135deg,#020617,#0f172a,#172554);
+            color:#e5e7eb;
+        }
+        body.dark-mode .container{
+            background:#111827;
+            box-shadow:0 14px 35px rgba(0,0,0,.5);
+        }
+        body.dark-mode h1{color:#f8fafc;}
+        body.dark-mode .subtitle{color:#cbd5e1;}
+        body.dark-mode label{color:#e5e7eb;}
+        body.dark-mode .optional{color:#94a3b8;}
+        body.dark-mode input,
+        body.dark-mode select,
+        body.dark-mode textarea{
+            background:#1f2937;
+            color:#f8fafc;
+            border-color:#475569;
+            color-scheme:dark;
+        }
+        body.dark-mode input::placeholder,
+        body.dark-mode textarea::placeholder{color:#94a3b8;}
+        body.dark-mode input:focus,
+        body.dark-mode select:focus,
+        body.dark-mode textarea:focus{
+            border-color:#818cf8;
+            box-shadow:0 0 0 3px rgba(129,140,248,.2);
+        }
+        body.dark-mode .section-header{background:#4338ca;}
+        body.dark-mode .section-header.office{background:#475569;}
+        body.dark-mode .file-upload-box{
+            background:#1f2937;
+            border-color:#818cf8;
+        }
+        body.dark-mode .file-upload-box:hover{background:#273449;}
+        body.dark-mode .declaration-box{
+            background:#1f2937;
+            color:#e5e7eb;
+            border-color:#475569;
+        }
+        body.dark-mode .sig-box{
+            color:#cbd5e1;
+            border-top-color:#cbd5e1;
+        }
+        body.dark-mode .office-field input,
+        body.dark-mode .office-field select{
+            background:#273449;
+            color:#cbd5e1;
+        }
+        body.dark-mode .terms a{color:#93c5fd;}
+        body.dark-mode p[style*="color:#4F46E5"]{color:#a5b4fc !important;}
+        body.dark-mode .theme-toggle{
+            background:#f8fafc;
+            color:#111827;
+            border-color:#cbd5e1;
+        }
+
+        @media(max-width:600px){
+            body{padding-top:82px;}
+            .theme-toggle{top:14px;right:14px;padding:9px 13px;font-size:13px;}
+        }
+
+    </style>
+</head>
+<body>
+<button type="button" id="themeToggle" class="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false">
+    <span id="themeIcon" aria-hidden="true">🌙</span>
+    <span id="themeText">Dark Mode</span>
+</button>
+
+
+<div class="container">
+
+    <h1>&#127979; Admission Form</h1>
+    <p class="subtitle">Fill in all required details carefully. Fields marked <span style="color:red">*</span> are mandatory.</p>
+
+    <form>
+
+        <!-- ══════════════════════════════════════
+             1. PERSONAL INFORMATION
+        ══════════════════════════════════════ -->
+        <div class="section-header"><span class="snum">1</span> Personal Information</div>
+
+        <div class="form-group">
+            <label for="full-name">Full Name <span style="color:red">*</span></label>
+            <input type="text" id="full-name" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="passport-photo">Passport-size Photograph <span style="color:red">*</span></label>
+            <div class="file-upload-box">
+                <input type="file" id="passport-photo" accept=".jpg,.jpeg,.png" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="dob">Date of Birth <span style="color:red">*</span></label>
+                <input type="date" id="dob" required>
+            </div>
+            <div class="form-group">
+                <label>Gender <span style="color:red">*</span></label>
+                <div class="radio-group">
+                    <label class="radio"><input type="radio" name="gender" value="male" required> Male</label>
+                    <label class="radio"><input type="radio" name="gender" value="female"> Female</label>
+                    <label class="radio"><input type="radio" name="gender" value="other"> Other</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="nationality">Nationality <span style="color:red">*</span></label>
+                <input type="text" id="nationality" placeholder="e.g. Indian" required>
+            </div>
+            <div class="form-group">
+                <label for="category">Category <span style="color:red">*</span></label>
+                <select id="category" required>
+                    <option value="">Select Category</option>
+                    <option>General</option>
+                    <option>OBC</option>
+                    <option>SC</option>
+                    <option>ST</option>
+                    <option>EWS</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="blood-group">Blood Group <span class="optional">(Optional)</span></label>
+                <select id="blood-group">
+                    <option value="">Select Blood Group</option>
+                    <option>A+</option><option>A-</option>
+                    <option>B+</option><option>B-</option>
+                    <option>AB+</option><option>AB-</option>
+                    <option>O+</option><option>O-</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="aadhaar-personal">Aadhaar Number <span class="optional">(Optional)</span></label>
+                <input type="text" id="aadhaar-personal" placeholder="XXXX XXXX XXXX" maxlength="14">
+            </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+             2. CONTACT INFORMATION
+        ══════════════════════════════════════ -->
+        <div class="section-header"><span class="snum">2</span> Contact Information</div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="mobile">Mobile Number <span style="color:red">*</span></label>
+                <input type="tel" id="mobile" placeholder="Enter 10-digit mobile number" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address <span style="color:red">*</span></label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="permanent-address">Permanent Address <span style="color:red">*</span></label>
+            <textarea id="permanent-address" rows="3" placeholder="House No., Street, Village/Town" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="correspondence-address">Correspondence Address <span style="color:red">*</span></label>
+            <textarea id="correspondence-address" rows="3" placeholder="House No., Street, Village/Town"></textarea>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="city">City <span style="color:red">*</span></label>
+                <input type="text" id="city" placeholder="Enter city" required>
+            </div>
+            <div class="form-group">
+                <label for="state">State <span style="color:red">*</span></label>
+                <select id="state" required>
+                    <option value="">Select State</option>
+                    <option>Andhra Pradesh</option><option>Arunachal Pradesh</option>
+                    <option>Assam</option><option>Bihar</option><option>Chhattisgarh</option>
+                    <option>Goa</option><option>Gujarat</option><option>Haryana</option>
+                    <option>Himachal Pradesh</option><option>Jharkhand</option>
+                    <option>Karnataka</option><option>Kerala</option>
+                    <option>Madhya Pradesh</option><option>Maharashtra</option>
+                    <option>Manipur</option><option>Meghalaya</option><option>Mizoram</option>
+                    <option>Nagaland</option><option>Odisha</option><option>Punjab</option>
+                    <option>Rajasthan</option><option>Sikkim</option><option>Tamil Nadu</option>
+                    <option>Telangana</option><option>Tripura</option>
+                    <option>Uttar Pradesh</option><option>Uttarakhand</option>
+                    <option>West Bengal</option>
+                    <option>Delhi (NCT)</option><option>Jammu &amp; Kashmir</option>
+                    <option>Ladakh</option><option>Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="pin">PIN Code <span style="color:red">*</span></label>
+                <input type="text" id="pin" placeholder="6-digit PIN" maxlength="6" required>
+            </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+             3. PARENT / GUARDIAN INFORMATION
+        ══════════════════════════════════════ -->
+        <div class="section-header"><span class="snum">3</span> Parent / Guardian Information</div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="father-name">Father's Name <span style="color:red">*</span></label>
+                <input type="text" id="father-name" placeholder="Enter father's full name" required>
+            </div>
+            <div class="form-group">
+                <label for="mother-name">Mother's Name <span style="color:red">*</span></label>
+                <input type="text" id="mother-name" placeholder="Enter mother's full name" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="guardian-name">Guardian's Name <span class="optional">(If applicable)</span></label>
+            <input type="text" id="guardian-name" placeholder="Enter guardian's name">
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="parent-occupation">Parent/Guardian Occupation <span style="color:red">*</span></label>
+                <input type="text" id="parent-occupation" placeholder="e.g. Farmer, Teacher, Business" required>
+            </div>
+            <div class="form-group">
+                <label for="parent-mobile">Parent/Guardian Mobile <span style="color:red">*</span></label>
+                <input type="tel" id="parent-mobile" placeholder="Enter mobile number" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="parent-email">Parent/Guardian Email <span class="optional">(Optional)</span></label>
+            <input type="email" id="parent-email" placeholder="Enter email address">
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+             4. ACADEMIC DETAILS
+        ══════════════════════════════════════ -->
+        <div class="section-header"><span class="snum">4</span> Academic Details</div>
+
+        <p style="font-size:13px;font-weight:600;color:#4F46E5;margin-bottom:12px;">10th Standard</p>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="board-10">Board Name <span style="color:red">*</span></label>
+                <input type="text" id="board-10" placeholder="e.g. CBSE, ICSE, State Board" required>
+            </div>
+            <div class="form-group">
+                <label for="school-10">School Name <span style="color:red">*</span></label>
+                <input type="text" id="school-10" placeholder="Enter school name" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="roll-10">Roll Number <span style="color:red">*</span></label>
+                <input type="text" id="roll-10" placeholder="Enter roll number" required>
+            </div>
+            <div class="form-group">
+                <label for="year-10">Year of Passing <span style="color:red">*</span></label>
+                <input type="number" id="year-10" placeholder="e.g. 2022" min="1990" max="2030" required>
+            </div>
+            <div class="form-group">
+                <label for="marks-10">Percentage / CGPA <span style="color:red">*</span></label>
+                <input type="text" id="marks-10" placeholder="e.g. 85% or 8.5" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="upload-10">Upload 10th Marksheet <span style="color:red">*</span></label>
+            <div class="file-upload-box">
+                <input type="file" id="upload-10" accept=".pdf,.jpg,.jpeg,.png" required>
+            </div>
+        </div>
+
+        <p style="font-size:13px;font-weight:600;color:#4F46E5;margin:16px 0 12px;">12th Standard</p>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="board-12">Board Name <span style="color:red">*</span></label>
+                <input type="text" id="board-12" placeholder="e.g. CBSE, ICSE, State Board" required>
+            </div>
+            <div class="form-group">
+                <label for="school-12">School Name <span style="color:red">*</span></label>
+                <input type="text" id="school-12" placeholder="Enter school name" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="roll-12">Roll Number <span style="color:red">*</span></label>
+                <input type="text" id="roll-12" placeholder="Enter roll number" required>
+            </div>
+            <div class="form-group">
+                <label for="year-12">Year of Passing <span style="color:red">*</span></label>
+                <input type="number" id="year-12" placeholder="e.g. 2024" min="1990" max="2030" required>
+            </div>
+            <div class="form-group">
+                <label for="marks-12">Percentage / CGPA <span style="color:red">*</span></label>
+                <input type="text" id="marks-12" placeholder="e.g. 78% or 7.8" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="upload-12">Upload 12th Marksheet <span style="color:red">*</span></label>
+            <div class="file-upload-box">
+                <input type="file" id="upload-12" accept=".pdf,.jpg,.jpeg,.png" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="entrance-name">Entrance Exam Name <span class="optional">(If applicable)</span></label>
+                <input type="text" id="entrance-name" placeholder="e.g. JEE, NEET, CUET">
+            </div>
+            <div class="form-group">
+                <label for="entrance-score">Entrance Exam Score / Rank <span class="optional">(If applicable)</span></label>
+                <input type="text" id="entrance-score" placeholder="e.g. 95 percentile / Rank 450">
+            </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+             5. COURSE DETAILS
+        ══════════════════════════════════════ -->
+        <div class="section-header"><span class="snum">5</span> Course Details</div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="course">Course Applied For <span style="color:red">*</span></label>
+                <select id="course" required>
+                    <option value="">Select Course</option>
+                    <option>BCA</option><option>MCA</option>
+                    <option>B.Tech</option><option>M.Tech</option>
+                    <option>B.Sc</option><option>M.Sc</option>
+                    <option>MBA</option><option>BBA</option>
+                    <option>B.Com</option><option>M.Com</option>
+                    <option>BA</option><option>MA</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="branch">Branch / Specialization <span style="color:red">*</span></label>
+                <input type="text" id="branch" placeholder="e.g. Computer Science, Finance" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="admission-type">Admission Type <span style="color:red">*</span></label>
+                <select id="admission-type" required>
+                    <option value="">Select Type</option>
+                    <option>Regular</option>
+                    <option>Management</option>
+                    <option>Lateral Entry</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="semester">Semester / Year <span style="color:red">*</span></label>
+                <select id="semester" required>
+                    <option value="">Select</option>
+                    <option>1st Semester / 1st Year</option>
+                    <option>2nd Semester</option>
+                    <option>3rd Semester / 2nd Year</option>
+                    <option>4th Semester</option>
+                    <option>5th Semester / 3rd Year</option>
+                    <option>6th Semester</option>
+                    <option>7th Semester / 4th Year</option>
+                    <option>8th Semester</option>
+                </select>
+            </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+             6. IDENTITY DETAILS
+        ══════════════════════════════════════ -->
+        <div class="section-header"><span class="snum">6</span> Identity Details</div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="aadhaar">Aadhaar Number <span style="color:red">*</span></label>
+                <input type="text" id="aadhaar" placeholder="XXXX XXXX XXXX" maxlength="14" required>
+            </div>
+            <div class="form-group">
+                <label for="pan">PAN Number <span class="optional">(Optional)</span></label>
+                <input type="text" id="pan" placeholder="ABCDE1234F" maxlength="10">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="passport-num">Passport Number <span class="optional">(For International Students)</span></label>
+            <input type="text" id="passport-num" placeholder="Enter passport number">
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+             7. DOCUMENTS UPLOAD
+        ══════════════════════════════════════ -->
+        <div class="section-header"><span class="snum">7</span> Documents Upload</div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="doc-photo">Passport-size Photograph <span style="color:red">*</span></label>
+                <div class="file-upload-box">
+                    <input type="file" id="doc-photo" accept=".jpg,.jpeg,.png" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="doc-signature">Student Signature <span style="color:red">*</span></label>
+                <div class="file-upload-box">
+                    <input type="file" id="doc-signature" accept=".jpg,.jpeg,.png" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="doc-10">10th Marksheet <span style="color:red">*</span></label>
+                <div class="file-upload-box">
+                    <input type="file" id="doc-10" accept=".pdf,.jpg,.jpeg,.png" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="doc-12">12th Marksheet <span style="color:red">*</span></label>
+                <div class="file-upload-box">
+                    <input type="file" id="doc-12" accept=".pdf,.jpg,.jpeg,.png" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="doc-tc">Transfer Certificate (TC) <span style="color:red">*</span></label>
+                <div class="file-upload-box">
+                    <input type="file" id="doc-tc" accept=".pdf,.jpg,.jpeg,.png" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="doc-migration">Migration Certificate <span style="color:red">*</span></label>
+                <div class="file-upload-box">
+                    <input type="file" id="doc-migration" accept=".pdf,.jpg,.jpeg,.png" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="doc-character">Character Certificate <span style="color:red">*</span></label>
+                <div class="file-upload-box">
+                    <input type="file" id="doc-character" accept=".pdf,.jpg,.jpeg,.png" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="doc-category">Category Certificate <span class="optional">(If applicable)</span></label>
+                <div class="file-upload-box">
+                    <input type="file" id="doc-category" accept=".pdf,.jpg,.jpeg,.png">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="doc-income">Income Certificate <span class="optional">(If applicable)</span></label>
+                <div class="file-upload-box">
+                    <input type="file" id="doc-income" accept=".pdf,.jpg,.jpeg,.png">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="doc-domicile">Domicile Certificate <span style="color:red">*</span></label>
+                <div class="file-upload-box">
+                    <input type="file" id="doc-domicile" accept=".pdf,.jpg,.jpeg,.png" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="doc-entrance">Entrance Exam Scorecard <span class="optional">(If applicable)</span></label>
+            <div class="file-upload-box">
+                <input type="file" id="doc-entrance" accept=".pdf,.jpg,.jpeg,.png">
+            </div>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+             8. MEDICAL INFORMATION (OPTIONAL)
+        ══════════════════════════════════════ -->
+        <div class="section-header"><span class="snum">8</span> Medical Information <span style="font-weight:400;font-size:12px;opacity:.85;">(Optional)</span></div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="med-blood">Blood Group</label>
+                <select id="med-blood">
+                    <option value="">Select Blood Group</option>
+                    <option>A+</option><option>A-</option>
+                    <option>B+</option><option>B-</option>
+                    <option>AB+</option><option>AB-</option>
+                    <option>O+</option><option>O-</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="emergency-contact">Emergency Contact Number</label>
+                <input type="tel" id="emergency-contact" placeholder="Enter emergency contact">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="med-conditions">Medical Conditions</label>
+            <textarea id="med-conditions" rows="3" placeholder="Mention any existing medical conditions (if any)"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="allergies">Allergies</label>
+            <textarea id="allergies" rows="2" placeholder="Mention any known allergies (if any)"></textarea>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+             9. DECLARATION
+        ══════════════════════════════════════ -->
+        <div class="section-header"><span class="snum">9</span> Declaration</div>
+
+        <div class="declaration-box">
+            I hereby declare that all the information provided in this admission form is true, complete, and accurate to the best of my knowledge. I understand that any false or misleading information may result in the cancellation of my admission. I agree to abide by the rules and regulations of the institution.
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="decl-date">Date <span style="color:red">*</span></label>
+                <input type="date" id="decl-date" required>
+            </div>
+            <div class="form-group">
+                <label for="decl-place">Place <span style="color:red">*</span></label>
+                <input type="text" id="decl-place" placeholder="Enter place" required>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:10px;">
+            <div class="form-group">
+                <label for="student-sig-upload">Applicant's Signature <span style="color:red">*</span></label>
+                <div class="file-upload-box">
+                    <input type="file" id="student-sig-upload" accept=".jpg,.jpeg,.png" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="guardian-sig-upload">Parent/Guardian Signature <span style="color:red">*</span></label>
+                <div class="file-upload-box">
+                    <input type="file" id="guardian-sig-upload" accept=".jpg,.jpeg,.png" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="terms">
+            <label>
+                <input type="checkbox" required>
+                I accept the <a href="#">Terms &amp; Conditions</a> and confirm that all information is correct.
+            </label>
+        </div>
+
+
+        <!-- ══════════════════════════════════════
+             10. OFFICE USE ONLY
+        ══════════════════════════════════════ -->
+        <div class="section-header office"><span class="snum">10</span> Office Use Only</div>
+
+        <div class="row office-field">
+            <div class="form-group">
+                <label for="app-number">Application Number</label>
+                <input type="text" id="app-number" placeholder="Auto-generated" readonly>
+            </div>
+            <div class="form-group">
+                <label for="admission-status">Admission Status</label>
+                <select id="admission-status" disabled>
+                    <option value="">Pending</option>
+                    <option>Approved</option>
+                    <option>Rejected</option>
+                    <option>Waitlisted</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row office-field">
+            <div class="form-group">
+                <label for="fee-status">Fee Payment Status</label>
+                <select id="fee-status" disabled>
+                    <option value="">Not Paid</option>
+                    <option>Paid</option>
+                    <option>Partial</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="verified-by">Verified By</label>
+                <input type="text" id="verified-by" placeholder="Officer name" readonly>
+            </div>
+        </div>
+
+        <div class="row office-field">
+            <div class="form-group">
+                <label for="admission-date">Admission Date</label>
+                <input type="date" id="admission-date" readonly>
+            </div>
+            <div class="form-group">
+                <label for="remarks">Remarks</label>
+                <input type="text" id="remarks" placeholder="Office remarks" readonly>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button type="submit" class="btn btn-submit">&#128196; Submit Application</button>
+            <button type="reset" class="btn btn-reset">&#10006; Reset Form</button>
+        </div>
+
+    </form>
+
+</div>
+
+
+<script>
+    (() => {
+        const toggle = document.getElementById('themeToggle');
+        const icon = document.getElementById('themeIcon');
+        const text = document.getElementById('themeText');
+        const storageKey = 'admissionFormTheme';
+
+        function applyTheme(theme) {
+            const dark = theme === 'dark';
+            document.body.classList.toggle('dark-mode', dark);
+            icon.textContent = dark ? '☀️' : '🌙';
+            text.textContent = dark ? 'Light Mode' : 'Dark Mode';
+            toggle.setAttribute('aria-pressed', String(dark));
+            toggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+        }
+
+        const savedTheme = localStorage.getItem(storageKey);
+        const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(savedTheme || (systemPrefersDark ? 'dark' : 'light'));
+
+        toggle.addEventListener('click', () => {
+            const nextTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+            localStorage.setItem(storageKey, nextTheme);
+            applyTheme(nextTheme);
+        });
+    })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Registration Form</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            background:linear-gradient(135deg,#4F46E5,#0affd6,#06B6D4);
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:30px;
+        }
+
+        .container{
+            width:100%;
+            max-width:700px;
+            background:#e8ffa9;
+            padding:35px;
+            border-radius:15px;
+            box-shadow:0 10px 25px rgba(0,0,0,.2);
+        }
+
+        h1{
+            text-align:center;
+            color:#333;
+            margin-bottom:10px;
+        }
+
+        .subtitle{
+            text-align:center;
+            color:#666;
+            margin-bottom:25px;
+            font-size:14px;
+        }
+
+        .form-group{
+            margin-bottom:18px;
+        }
+
+        label{
+            display:block;
+            margin-bottom:8px;
+            font-weight:600;
+            color:#333;
+        }
+
+        input,
+        select,
+        textarea{
+            width:100%;
+            padding:12px;
+            border:1px solid #ccc;
+            border-radius:8px;
+            outline:none;
+            transition:.3s;
+            font-size:15px;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus{
+            border-color:#4F46E5;
+            box-shadow:0 0 8px rgba(79,70,229,.3);
+        }
+
+        textarea{
+            resize:vertical;
+        }
+
+        .row{
+            display:flex;
+            gap:15px;
+        }
+
+        .row .form-group{
+            flex:1;
+        }
+
+        .gender-group{
+            display:flex;
+            gap:20px;
+            flex-wrap:wrap;
+        }
+
+        .radio,
+        .check{
+            display:flex;
+            align-items:center;
+            gap:6px;
+            font-weight:500;
+        }
+
+        .radio input,
+        .check input{
+            width:auto;
+        }
+
+        .skills-grid{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:10px;
+        }
+
+        input[type="file"]{
+            border:none;
+            padding:5px;
+        }
+
+        .terms{
+            margin:20px 0;
+        }
+
+        .terms label{
+            display:flex;
+            align-items:center;
+            gap:8px;
+            font-weight:500;
+        }
+
+        .terms input{
+            width:auto;
+        }
+
+        .terms a{
+            color:#4F46E5;
+            text-decoration:none;
+        }
+
+        .terms a:hover{
+            text-decoration:underline;
+        }
+
+        .button-group{
+            display:flex;
+            gap:15px;
+            margin-top:20px;
+        }
+
+        .btn{
+            flex:1;
+            padding:12px;
+            border:none;
+            border-radius:8px;
+            color:white;
+            font-size:16px;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        .register{
+            background:#4F46E5;
+        }
+
+        .reset{
+            background:#EF4444;
+        }
+
+        .btn:hover{
+            transform:translateY(-2px);
+            opacity:.9;
+        }
+
+        @media(max-width:768px){
+
+            .row{
+                flex-direction:column;
+            }
+
+            .skills-grid{
+                grid-template-columns:1fr;
+            }
+
+            .button-group{
+                flex-direction:column;
+            }
+
+            .container{
+                padding:25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Student Registration Form</h1>
+
+    <p class="subtitle">
+        Fill in your details to complete your registration.
+    </p>
+
+    <form>
+
+        <!-- Full Name -->
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input
+                type="text"
+                id="name"
+                placeholder="Enter your full name"
+                required>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required>
+        </div>
+
+        <!-- Password -->
+        <div class="row">
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Create password"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="confirm">Confirm Password</label>
+                <input
+                    type="password"
+                    id="confirm"
+                    placeholder="Confirm password"
+                    required>
+            </div>
+
+        </div>
+
+        <!-- Mobile -->
+        <div class="form-group">
+            <label for="mobile">Mobile Number</label>
+            <input
+                type="tel"
+                id="mobile"
+                placeholder="Enter mobile number"
+                required>
+        </div>
+
+        <!-- Date of Birth -->
+        <div class="form-group">
+            <label for="dob">Date of Birth</label>
+            <input
+                type="date"
+                id="dob"
+                required>
+        </div>
+
+        <!-- Gender -->
+        <div class="form-group">
+
+            <label>Gender</label>
+
+            <div class="gender-group">
+
+                <label class="radio">
+                    <input type="radio" name="gender" required>
+                    <span>Male</span>
+                </label>
+
+                <label class="radio">
+                    <input type="radio" name="gender">
+                    <span>Female</span>
+                </label>
+
+                <label class="radio">
+                    <input type="radio" name="gender">
+                    <span>Other</span>
+                </label>
+
+            </div>
+
+        </div>
+
+        <!-- Course -->
+        <div class="form-group">
+
+            <label for="course">Course</label>
+
+            <select id="course" required>
+
+                <option value="">Select Course</option>
+                <option>BCA</option>
+                <option>MCA</option>
+                <option>B.Tech</option>
+                <option>B.Sc</option>
+                <option>M.Tech</option>
+                <option>MBA</option>
+
+            </select>
+
+        </div>
+
+        <!-- Skills -->
+        <div class="form-group">
+
+            <label>Skills</label>
+
+            <div class="skills-grid">
+
+                <label class="check">
+                    <input type="checkbox">
+                    HTML
+                </label>
+
+                <label class="check">
+                    <input type="checkbox">
+                    CSS
+                </label>
+
+                <label class="check">
+                    <input type="checkbox">
+                    JavaScript
+                </label>
+
+                <label class="check">
+                    <input type="checkbox">
+                    React
+                </label>
+
+                <label class="check">
+                    <input type="checkbox">
+                    PHP
+                </label>
+
+                <label class="check">
+                    <input type="checkbox">
+                    Python
+                </label>
+
+            </div>
+
+        </div>
+
+        <!-- Resume -->
+        <div class="form-group">
+
+            <label for="resume">Upload Resume</label>
+
+            <input
+                type="file"
+                id="resume"
+                accept=".pdf,.doc,.docx">
+
+        </div>
+
+        <!-- About Yourself -->
+        <div class="form-group">
+
+            <label for="about">About Yourself</label>
+
+            <textarea
+                id="about"
+                rows="5"
+                placeholder="Write something about yourself..."></textarea>
+
+        </div>
+
+        <!-- Terms -->
+        <div class="terms">
+
+            <label>
+                <input type="checkbox" required>
+                I accept the
+                <a href="#">Terms & Conditions</a>
+            </label>
+
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-group">
+
+            <button
+                type="submit"
+                class="btn register">
+                Register
+            </button>
+
+            <button
+                type="reset"
+                class="btn reset">
+                Reset
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>

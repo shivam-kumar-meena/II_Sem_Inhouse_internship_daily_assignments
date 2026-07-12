@@ -1,0 +1,39 @@
+/* General typography improvements */
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Card interactions and styling */
+.student-card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: none;
+    border-radius: 12px;
+    overflow: hidden; /* Ensures the image respects border radius */
+}
+
+.student-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important;
+}
+
+.card-img-top {
+    height: 250px;
+    object-fit: cover;
+    background-color: #e9ecef;
+}
+
+/* Hidden details section (crucial for jQuery slideToggle) */
+.student-details {
+    display: none; /* Hidden by default */
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    padding: 15px;
+    margin-top: 15px;
+    border-left: 4px solid #0d6efd;
+}
+
+/* Typography tweaks inside card */
+.email-text {
+    font-size: 0.9rem;
+    word-break: break-all;
+}
