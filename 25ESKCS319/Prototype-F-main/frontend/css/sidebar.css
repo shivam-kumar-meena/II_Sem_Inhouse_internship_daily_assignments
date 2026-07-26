@@ -1,0 +1,160 @@
+/* ===== Sidebar ===== */
+.sidebar{
+  position:fixed;top:0;left:-360px;width:340px;height:100%;
+  background:var(--panel);border-right:1px solid var(--line);
+  transition:left .32s cubic-bezier(.22,1,.36,1);z-index:2500;display:flex;flex-direction:column
+}
+.sidebar.active{left:0}
+.sb-top{display:flex;align-items:center;justify-content:space-between;padding:14px;border-bottom:1px solid var(--line)}
+.sb-title{font-family:'Poppins',sans-serif;font-weight:700}
+.close-btn{width:36px;height:36px;border:none;border-radius:10px;color:inherit;cursor:pointer;background:#121212}
+.sb-body{padding:14px 14px 90px;overflow:auto}
+.tiles{display:grid;grid-template-columns:1fr;gap:12px}
+.tile{
+  position:relative;overflow:hidden;border-radius:14px;padding:16px;
+  background:linear-gradient(135deg,#0b0b0b,#111);border:1px solid #1f3a5a;
+  transition:transform .2s, box-shadow .2s, border-color .2s;
+}
+[data-theme="light"] .tile{background:linear-gradient(135deg,#f9fbff,#eef3ff);border-color:#c9d4f2;color:#0b1220}
+.tile::after{
+  content:"";position:absolute;inset:-80% -80% auto auto;width:200%;height:200%;
+  background:radial-gradient(60px 60px at var(--mx,50%) var(--my,50%),rgba(0,208,255,.22),transparent 60%);
+  pointer-events:none;opacity:.8
+}
+.tile:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,200,255,.18);border-color:#2c7fe8}
+.tile.active{
+  border-color:#00d0ff;
+  box-shadow:0 0 18px rgba(0,208,255,.35);
+  transform:translateY(-2px);
+}
+.tile:active{
+  transform:scale(0.97);
+}
+.tile h4{font-family:'Poppins',sans-serif;font-size:1rem;margin-bottom:6px}
+.tile p{font-size:.86rem;opacity:.85}
+.credits{margin-top:16px;padding-top:12px;border-top:1px dashed var(--line);font-size:.85rem;opacity:.78;text-align:center;line-height:1.45}
+
+.credits-clean{
+  margin-top:28px;
+  padding-top:14px;
+  border-top:1px solid rgba(255,255,255,.08);
+  text-align:center;
+}
+.credits-title{
+  font-family:'Poppins',sans-serif;
+  font-weight:800;
+  font-size:0.95rem;
+  letter-spacing:0.6px;
+  color:#ffffff;
+}
+.credits-names{
+  margin-top:6px;
+  font-size:0.78rem;
+  opacity:0.55;
+  letter-spacing:0.3px;
+  line-height:1.6;
+}
+
+/* Voice options in sidebar */
+.voice-options{
+  margin:10px 2px 0 2px;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:8px;
+}
+.voice-opt{
+  padding:10px 12px; border-radius:10px; border:1px solid var(--line);
+  background:var(--panel-2); color:inherit; cursor:pointer; font-weight:600;
+}
+.voice-opt:hover{ filter:brightness(1.06); }
+.voice-opt.active{ outline:2px solid var(--accent); box-shadow:0 0 12px rgba(0,136,255,.25) inset; }
+
+/* ================= MEMORY SIDEBAR ================= */
+.memory-sidebar{
+  position:fixed;
+  top:0;
+  right:-420px;
+  width:min(420px,90vw);
+  height:100%;
+  background:var(--panel);
+  border-left:1px solid var(--line);
+  z-index:2600;
+  transition:right .32s ease;
+  display:flex;
+  flex-direction:column;
+}
+.memory-sidebar.active{
+  right:0;
+}
+.mem-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px;
+  border-bottom:1px solid var(--line);
+  font-family:'Poppins',sans-serif;
+}
+.mem-header button{
+  border:none;
+  background:#222;
+  color:#fff;
+  width:34px;
+  height:34px;
+  border-radius:8px;
+  cursor:pointer;
+}
+.mem-body{
+  padding:16px;
+  overflow:auto;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+#memList{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.mem-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:var(--panel-2);
+  padding:10px 12px;
+  border-radius:10px;
+  border:1px solid var(--line);
+}
+.mem-text{
+  flex:1;
+  font-size:.9rem;
+}
+.mem-actions{
+  display:flex;
+  gap:6px;
+}
+.mem-actions button{
+  border:none;
+  padding:4px 8px;
+  border-radius:6px;
+  cursor:pointer;
+  background:#1a1a1a;
+  color:#fff;
+}
+.mem-add{
+  display:flex;
+  gap:8px;
+}
+.mem-add input{
+  flex:1;
+  padding:8px;
+  border-radius:8px;
+  border:1px solid var(--line);
+  background:var(--panel-2);
+  color:#fff;
+}
+.mem-add button{
+  padding:8px 14px;
+  border:none;
+  border-radius:8px;
+  background:#0af;
+  color:#fff;
+  cursor:pointer;
+}

@@ -1,0 +1,130 @@
+/* ===== JARVIS Fullscreen Voice Mode Overlay ===== */
+
+.jarvis-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #000000; /* Pure black background */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .35s cubic-bezier(.22,1,.36,1), visibility .35s;
+  will-change: opacity;
+}
+
+.jarvis-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Sidebar Hamburger Menu Button in Overlay (Highest z-index & interactive) */
+.jarvis-menu-btn {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.3);
+  color: #FFF;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: transform .2s, background .2s, box-shadow .2s;
+  z-index: 2100;
+  pointer-events: auto;
+}
+
+.jarvis-menu-btn:hover {
+  transform: scale(1.1);
+  background: rgba(255,255,255,.22);
+  box-shadow: 0 0 20px rgba(255,255,255,.4);
+}
+
+.jarvis-menu-btn .bars {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 20px;
+}
+
+.jarvis-menu-btn .bar {
+  display: block;
+  height: 2px;
+  background: #FFF;
+  border-radius: 2px;
+  width: 100%;
+}
+
+/* Cancel / Exit Button (Highest z-index & interactive) */
+.jarvis-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.3);
+  color: #FFF;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: transform .2s, background .2s, box-shadow .2s;
+  z-index: 2100;
+  pointer-events: auto;
+}
+
+.jarvis-close:hover {
+  transform: scale(1.1);
+  background: rgba(255,255,255,.22);
+  box-shadow: 0 0 20px rgba(255,255,255,.4);
+}
+
+/* Fullscreen Stage (Center Grid) */
+.jarvis-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.jarvis-robot-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* Prominent Scaled Bot Face in Fullscreen */
+.jarvis-overlay #bot, 
+.jarvis-overlay .jarvis-bot, 
+.jarvis-overlay #JarvisBot {
+  font-size: 18px;
+  width: 24em;
+  height: 24em;
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (max-width: 680px) {
+  .jarvis-overlay #bot, 
+  .jarvis-overlay .jarvis-bot, 
+  .jarvis-overlay #JarvisBot {
+    font-size: 13px;
+  }
+}

@@ -1,0 +1,35 @@
+:root{
+  --bg1:#02040a; --bg2:#000;
+  --panel:#0a0a0a; --panel-2:#111; --line:#2c2c2c;
+  --accent:#07f; --accent-2:#0af;
+  --green:#34c759; --green-2:#28a745;
+  --neon:#00d0ff;
+  --barH: 88px;
+  --anim:.25s ease;
+  --input-bg:#fff; --input-fg:#000;
+}
+[data-theme="light"]{
+  --bg1:#f6f8ff; --bg2:#ffffff;
+  --panel:#ffffff; --panel-2:#f5f7ff; --line:#e3e6ef;
+  --input-bg:#0f1117; --input-fg:#ffffff;
+  color-scheme: light;
+}
+
+/* ===== Base ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+html, body{
+  height:100%;
+  overscroll-behavior: none;
+  background:#000;
+}
+body{
+  font-family:'Inter',sans-serif;
+  min-height:100%;
+  background:linear-gradient(160deg,var(--bg1),var(--bg2));
+  color:#fff;overflow:auto;
+  transition:background-color var(--anim), color var(--anim), background var(--anim);
+  padding-top:64px;
+  overscroll-behavior-y: none;
+  background-color:#000;
+}
+[data-theme="light"] body{color:#0b1220}

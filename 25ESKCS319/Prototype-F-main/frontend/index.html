@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prototype-X</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/chat.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/jarvis.css">
+</head>
+<body>
+
+  <header>
+    <div class="header-left">
+      <button class="menu-btn" id="menuToggle" aria-label="Open menu">
+        <span class="bars"><span class="bar"></span></span>
+      </button>
+      <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="Robot">
+    </div>
+    <h1>Prototype-X</h1>
+    <div class="header-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☾</button>
+    </div>
+  </header>
+
+  <aside class="sidebar" id="sidebar" aria-hidden="true">
+    <div class="sb-top">
+      <div class="sb-title">Menu</div>
+      <button class="close-btn" id="closeSidebar" aria-label="Close">×</button>
+    </div>
+    <div class="sb-body">
+      <div class="tiles" id="tiles">
+
+        <div class="tile" id="newChatTile">
+          <h4>New Chat</h4>
+          <p>Start a fresh conversation.</p>
+        </div>
+
+        <div class="tile" id="historyTile">
+          <h4>History</h4>
+          <p>Review recent chats.</p>
+        </div>
+
+        <div class="tile" id="voiceTile"><h4>Voice</h4><p>voice mode <b id="voiceCurrent">Heart</b></p></div>
+
+        <div class="tile" id="langTile"><h4>Language</h4><p>Current: <b id="langCurrent">Hinglish</b></p></div>
+        <div class="tile" id="lenTile">
+          <h4>Answer Length</h4>
+          <p>Current: <b id="lenCurrent">Default</b></p>
+        </div>
+        <div class="tile" id="memoryTile">
+          <h4>Memory</h4>
+          <p>Save notes the bot should remember.</p>
+        </div>
+
+        <div class="tile" id="modeTile" style="position:relative;">
+          <h4>Mode</h4>
+          <p>Current: <b id="modeCurrent">Assistant</b></p>
+          <div id="moodPanel" class="voice-options mood-subpanel" hidden>
+            <button class="voice-opt mood-opt active" data-mood="neutral">🟢 Assistant</button>
+            <button class="voice-opt mood-opt" data-mood="hardcore">🔴 Professional</button>
+            <button class="voice-opt mood-opt" data-mood="caution">🟡 Direct</button>
+          </div>
+        </div>
+
+        <div id="historyContainer" style="display:none; flex-direction:column; gap:12px; margin-top:10px;"></div>
+
+        <div id="langPanel" class="voice-options" hidden>
+          <button class="voice-opt lang-opt" data-lang="hinglish">Hinglish</button>
+          <button class="voice-opt lang-opt" data-lang="en-in">Indian English</button>
+        </div>
+
+        <div id="lenPanel" class="voice-options" hidden style="grid-template-columns:1fr;">
+          <input id="lenSlider" type="range" min="1" max="50" value="1"/>
+        </div>
+
+        <div id="voiceOptions" class="voice-options" hidden style="grid-template-columns: repeat(2, 1fr);">
+          <button class="voice-opt active" data-voice="af_heart">Heart</button>
+          <button class="voice-opt" data-voice="af_bella">Bella</button>
+          <button class="voice-opt" data-voice="af_nicole">Nicole</button>
+          <button class="voice-opt" data-voice="af_sarah">Sarah</button>
+          <button class="voice-opt" data-voice="af_sky">Sky</button>
+          <button class="voice-opt" data-voice="am_adam">Adam</button>
+          <button class="voice-opt" data-voice="am_michael">Michael</button>
+        </div>
+
+        <div class="credits-clean">
+          <div class="credits-title">Prototype-X</div>
+          <div class="credits-names">
+            Made with ❤️ by<br>
+            Shailly · Shivam · Dhananjay · Akhil
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="backdrop" id="backdrop" aria-hidden="true"></div>
+
+  <div class="memory-sidebar" id="memoryPanel">
+    <div class="mem-header">
+      <h3>🧠 Memory Manager</h3>
+      <button id="memClose">×</button>
+    </div>
+    <div class="mem-body">
+      <div id="memList"></div>
+      <div class="mem-add">
+        <input id="memInput" placeholder="Add new memory..." />
+        <button id="memAddBtn">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-banner" id="heroBanner">
+    <div class="hero-wrap">
+      <div id="bot" class="neutral mood-neutral">
+        <div id="head">
+          <div id="left-ear">
+            <div id="left-ear-inner"></div>
+          </div>
+          <div id="face">
+            <div id="eyes">
+              <div id="left-eye"></div>
+              <div id="right-eye"></div>
+            </div>
+            <div id="mouth"></div>
+          </div>
+          <div id="right-ear">
+            <div id="right-ear-inner"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="main">
+    <section class="chat-container" id="chatContainer">
+      <div class="chat-bubble bot-bubble">
+        <span class="bot-emoji" aria-hidden="true">🤖</span>
+        <span class="text"><strong id="greetText">Hello! I'm Prototype-X — ask me anything.</strong></span>
+      </div>
+      <div class="chat-bubble user-bubble"><span class="text">Hey there!</span></div>
+    </section>
+
+    <div class="input-bar" id="inputBar">
+      <div class="input-wrap">
+        <textarea id="userInput" class="input" placeholder="Ask me anything..."></textarea>
+        <button class="icon-btn icon-inside" id="attachBtn" title="Add">＋</button>
+        <button class="icon-btn icon-inside" id="micBtn" title="Speak">🎤</button>
+        <button class="icon-btn icon-inside" id="sendBtn" title="Send">➤</button>
+
+        <div class="plus-menu" id="plusMenu" role="menu" aria-hidden="true">
+          <button class="plus-item" id="summarizeBtn"><span class="ico">🧩</span> Summarize</button>
+          <button class="plus-item" id="uploadBtn"><span class="ico">📤</span> Upload files</button>
+          <button class="plus-item" id="memoryQuick"><span class="ico">🧠</span> Memory: <b id="memoryQuickText">OFF</b></button>
+          <input id="hiddenFile" type="file" style="display:none" />
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <template id="BotHeadMiniTpl">
+    <div id="bot" class="neutral mood-neutral bot-mini">
+      <div id="head">
+        <div id="left-ear"><div id="left-ear-inner"></div></div>
+        <div id="face">
+          <div id="eyes">
+            <div id="left-eye"></div>
+            <div id="right-eye"></div>
+          </div>
+          <div id="mouth"></div>
+        </div>
+        <div id="right-ear"><div id="right-ear-inner"></div></div>
+      </div>
+    </div>
+  </template>
+
+  <audio id="ttsPlayer" style="display:none"></audio>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
